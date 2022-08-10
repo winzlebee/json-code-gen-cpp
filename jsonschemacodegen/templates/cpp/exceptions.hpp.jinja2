@@ -5,11 +5,9 @@
 #include <string>
 #include <sstream>
 #include <boost/algorithm/string/join.hpp>
-
 {%for n in ns-%}
 namespace {{n}} {
 {%-endfor%}
-
 /*! Encapsulates a JSON path.  This is not the "JSONPath" standard, but a simple representation of a pointer to a value in a JSON-object tree.
  * For example, the path `A/B/C` would point to _"this is the string"_ in the following JSON object:
  * ```
@@ -86,25 +84,25 @@ class JsonException : public std::exception
 
 };
 
-/*! This exception type should be used when rapidjson couldn't parse a JSON document.
+/*! This exception type should be used when boost::json couldn't parse a JSON document.
  */
-class RapidJsonParseException : public JsonException
+class BoostJsonParseException : public JsonException
 {
 public:
     /*! Constructor (C strings).
      *  @param whatArg C-style string error message.
      */
-    explicit RapidJsonParseException(const char* whatArg) : JsonException(), _whatArg(whatArg) { }
+    explicit BoostJsonParseException(const char* whatArg) : JsonException(), _whatArg(whatArg) { }
 
     /*! Constructor (C++ STL strings).
      *  @param whatArg The error message.
      */
-    explicit RapidJsonParseException(const std::string& whatArg) : JsonException(), _whatArg(whatArg) { }
+    explicit BoostJsonParseException(const std::string& whatArg) : JsonException(), _whatArg(whatArg) { }
 
     /** Destructor.
      * Virtual to allow for subclassing.
      */
-    virtual ~RapidJsonParseException() throw () {}
+    virtual ~BoostJsonParseException() throw () {}
 
     /** Returns a pointer to the (constant) error description.
      *  @return A pointer to a const char*. 

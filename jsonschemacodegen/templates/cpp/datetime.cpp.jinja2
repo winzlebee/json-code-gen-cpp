@@ -108,7 +108,7 @@ boost::posix_time::ptime {{className}}::Get() const
     return *_value;
 }
 
-{{className}} {{className}}::FromJson(const {{resolver.cpp_resolve_namespace(['rapidjson'])}}Value& json)
+{{className}} {{className}}::FromJson(const {{resolver.cpp_resolve_namespace(['boost', 'json'])}}value& json)
 {
     if (!(json.IsString()))
     {
@@ -123,7 +123,7 @@ boost::posix_time::ptime {{className}}::Get() const
     return {{className}}(str);
 }
 
-void {{className}}::ToJson({{resolver.cpp_resolve_namespace(['rapidjson'])}}Value& value, {{resolver.cpp_resolve_namespace(['rapidjson', 'Value'])}}AllocatorType& allocator) const
+void {{className}}::ToJson({{resolver.cpp_resolve_namespace(['boost', 'json'])}}value& value) const
 {
     std::string tempVal(GetString());
     value.SetString(tempVal.c_str(), tempVal.size(), allocator);  

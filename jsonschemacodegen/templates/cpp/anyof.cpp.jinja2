@@ -30,7 +30,7 @@
 }
 
 {%-for s in schema.anyOf %}{%set componentName%}Component{{loop.index}}{%endset%}
-boost::optional<{{ObjectType(componentName, s)}}> {{className}}::Get{{ObjectName(componentName, s)}}() const
+std::optional<{{ObjectType(componentName, s)}}> {{className}}::Get{{ObjectName(componentName, s)}}() const
 {
     return {{componentName|privatize}};
 }
@@ -42,7 +42,7 @@ void {{className}}::Set{{ObjectName(componentName, s)}}(const {{ObjectType(compo
 }
 {%endfor%}
 
-{{className}} {{className}}::FromJson(const rapidjson::Value& json)
+{{className}} {{className}}::FromJson(const boost::json::value& json)
 {
     {%-if schema.requiredProperties | length > 0 %}
     ThrowIfMissingRequiredProperties(json);
@@ -62,11 +62,11 @@ void {{className}}::Set{{ObjectName(componentName, s)}}(const {{ObjectType(compo
     return returnObject;
 }
 
-void {{className}}::ToJson(rapidjson::Value& value, rapidjson::Value::AllocatorType& allocator) const
+void {{className}}::ToJson(boost::json::value& value) const
 {
-    if (!value.IsObject())
+    if (!value.is_object())
     {
-        value.SetObject();
+        value = boost::json::object();
     }
 
     {%-for s in schema.anyOf %}{%set componentName%}Component{{loop.index}}{%endset%}
@@ -99,9 +99,9 @@ std::string {{className}}::GetHandle() const
 }
 
 {%if schema.requiredProperties | length > 0 %}
-void {{className}}::ThrowIfMissingRequiredProperties(const rapidjson::Value& json)
+void {{className}}::ThrowIfMissingRequiredProperties(const boost::json::value& json)
 {
-    if (!json.IsObject())
+    if (!json.is_object())
     {
         throw {{exception}}("Not an object");
     }

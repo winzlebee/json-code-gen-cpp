@@ -113,7 +113,7 @@ public:
      * \return new {{Name}} object containing values from the JSON.
      * \param json JSON structure to use for creating new {{Name}} object.
      */
-    static {{Name}} FromJson(const rapidjson::Value& json);
+    static {{Name}} FromJson(const boost::json::value& json);
 
     /*! Create a new {{Name}} object from the string.
      * The string must be ISO8601 {{schema.format}} formatted.
@@ -125,9 +125,8 @@ public:
 
     /*! Serialize the {{Name}} instance into a JSON string.
      * \param value is modified to be a string type containing an ISO8601 {{schema.format}}.
-     * \param allocator is used for rapidjson allocation.
      */
-    void ToJson(rapidjson::Value& value, rapidjson::Value::AllocatorType& allocator) const;
+    void ToJson(boost::json::value& value) const;
 
     /*! Sets a string handle associated with this {{Name}} instance.
      * This gets called by a parent object after creating an instance that is used for an object's property.
@@ -142,6 +141,6 @@ public:
      */
     std::string GetHandle() const;
 private:
-    boost::optional<boost::posix_time::ptime> _value;
+    std::optional<boost::posix_time::ptime> _value;
     std::string _handle;
 };

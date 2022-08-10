@@ -85,7 +85,7 @@ void {{className}}::Set({{enumType}} value)
     }
 }
 
-{{className}} {{className}}::FromJson(const {{resolver.cpp_resolve_namespace(['rapidjson'])}}Value& json)
+{{className}} {{className}}::FromJson(const {{resolver.cpp_resolve_namespace(['boost', 'json'])}}value& json)
 {
     if (!(json.IsString()))
     {
@@ -108,7 +108,7 @@ void {{className}}::Set({{enumType}} value)
     return {{className}}(StringToEnum(str));
 }
 
-void {{className}}::ToJson({{resolver.cpp_resolve_namespace(['rapidjson'])}}Value& value, {{resolver.cpp_resolve_namespace(['rapidjson', 'Value'])}}AllocatorType& allocator) const
+void {{className}}::ToJson({{resolver.cpp_resolve_namespace(['boost', 'json'])}}value& value) const
 {
     {{std}}string strValue = EnumToString(_value);
     value.SetString(strValue.c_str(), strValue.size(), allocator);

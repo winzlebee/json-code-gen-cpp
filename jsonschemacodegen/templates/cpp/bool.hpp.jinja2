@@ -41,20 +41,20 @@ public:
      */
     bool Get() const;
 
-    /*! \fn {{Name}} FromJson(const rapidjson::Value& json)
+    /*! \fn {{Name}} FromJson(const boost::json::value& json)
      * \brief Deserializes JSON into a new instance of the {{Name}} object.
-     * \param json is the RapidJSON value which must be a boolean type.
+     * \param json is the boost::json value which must be a boolean type.
      * \throw {{exception}} If the JSON data is not a boolean
      * \returns {{Name}}
      */
-    static {{Name}} FromJson(const rapidjson::Value& json);
+    static {{Name}} FromJson(const boost::json::value& json);
 
-    /*! \fn ToJson(rapidjson::Value& value, rapidjson::Value::AllocatorType& allocator)
+    /*! \fn ToJson(boost::json::value& value)
      * \brief Serializes boolean value to JSON
-     * \param value is the RapidJSON value which will be modified to contain the serialization
-     * \param allocator is the top-level RapidJSON document allocator which may be used for allocations
+     * \param value is the boost::json value which will be modified to contain the serialization
+     * \param allocator is the top-level boost::json document allocator which may be used for allocations
      */
-    void ToJson(rapidjson::Value& value, rapidjson::Value::AllocatorType& allocator) const;
+    void ToJson(boost::json::value& value) const;
 
     /*! Sets a string handle associated with this {{Name}} instance.
      * This gets called by a parent object after creating an instance that is used for an object's property.

@@ -6,4 +6,5 @@ build/
 .vscode/
 *~
 *.pyc
+test.py
 .DS_Store

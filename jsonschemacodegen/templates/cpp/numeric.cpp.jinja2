@@ -82,7 +82,7 @@ void {{className}}::Validate({{cpptype}} testValue)
     {%-endif%}
 }
 
-{{className}} {{className}}::FromJson(const {{resolver.cpp_resolve_namespace(['rapidjson'])}}Value& json)
+{{className}} {{className}}::FromJson(const {{resolver.cpp_resolve_namespace(['boost', 'json'])}}value& json)
 {
     if (!(json.Is{{rjtype | UpperCamelCase}}()))
     {
@@ -98,7 +98,7 @@ void {{className}}::Validate({{cpptype}} testValue)
     return {{className}}({{resolver.cpp_resolve_namespace(['boost'])}}lexical_cast<{{cpptype}}>(str));
 }
 
-void {{className}}::ToJson({{resolver.cpp_resolve_namespace(['rapidjson'])}}Value& value, {{resolver.cpp_resolve_namespace(['rapidjson', 'Value'])}}AllocatorType& allocator) const
+void {{className}}::ToJson({{resolver.cpp_resolve_namespace(['boost', 'json'])}}value& value) const
 {
     value.Set{{cpptype | UpperCamelCase}}(_value); 
 }

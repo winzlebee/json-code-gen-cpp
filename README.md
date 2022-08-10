@@ -1,6 +1,7 @@
-# JSON-Schema Codegen
+# JSON-Schema Codegen (Added boost support)
 
 This python library consumes JSON-Schema and generates C++ or Python code.  It generates structures to hold the values defined in the schema, restricting the values according to the schema. 
+This repository has been forked to add boost::json support for generation. This can be tweaked as a command-line parameter.
 
 ## Python Requirements for Code Generation
 
@@ -60,8 +61,7 @@ A C++ class is generated for each schema node according to the schema's `type` p
 
 ### Dependencies of the C++ generated code
 
-* boost (boost::optional and boost::variant among others)
-* rapidjson 1.1
+* boost (boost::variant and boost::json among others)
 * C++11
 
 ### Usage

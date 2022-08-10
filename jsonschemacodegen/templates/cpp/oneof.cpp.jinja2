@@ -101,7 +101,7 @@ void {{className}}::Set(const boost::variant<{{optionList}}>& variant)
 }
 {%-endif%}
 
-{{className}} {{className}}::FromJson(const rapidjson::Value& json)
+{{className}} {{className}}::FromJson(const boost::json::value& json)
 {
     {{exception}}Collection exceptionCollection;
     {%for s in schema.oneOf -%}{%set optionName%}Option{{loop.index}}{%endset-%}
@@ -122,7 +122,7 @@ void {{className}}::Set(const boost::variant<{{optionList}}>& variant)
     throw {{exception}}(exceptionCollection.what());
 }
 
-void {{className}}::ToJson(rapidjson::Value& value, rapidjson::Value::AllocatorType& allocator) const
+void {{className}}::ToJson(boost::json::value& value) const
 {
     {%for s in schema.oneOf %}{%set optionName%}Option{{loop.index}}{%endset-%}
     {%if not loop.first%}

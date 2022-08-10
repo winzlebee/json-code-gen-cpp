@@ -1,5 +1,5 @@
 {%-set std = resolver.cpp_resolve_namespace(['std']) %}
-{%-set rapidjson = resolver.cpp_resolve_namespace(['rapidjson']) %}
+{%-set boostjson = resolver.cpp_resolve_namespace(['boost', 'json']) %}
 {%-set className = resolver.cpp_resolve_namespace(ns)+Name%}
 {%-set exception %}{{resolver.cpp_get_lib_ns() | join('::')}}::JsonSchemaException{%endset%}
 {{className}}::{{Name}}(bool value)
@@ -36,7 +36,7 @@ bool {{className}}::Get() const
     return _value;
 }
 
-{{className}} {{className}}::FromJson(const {{rapidjson}}Value& json)
+{{className}} {{className}}::FromJson(const {{boostjson}}value& json)
 {
     if (!(json.IsBool()))
     {
@@ -47,7 +47,7 @@ bool {{className}}::Get() const
     return newObject;
 }
 
-void {{className}}::ToJson({{rapidjson}}Value& value, {{resolver.cpp_resolve_namespace(['rapidjson', 'Value'])}}AllocatorType& allocator) const
+void {{className}}::ToJson({{boostjson}}value& value) const
 {
     value.SetBool(_value); 
 }

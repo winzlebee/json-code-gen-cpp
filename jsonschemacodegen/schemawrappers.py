@@ -54,7 +54,7 @@ class SchemaBase(collections.UserDict):
 
     def CppIncludes(self, resolver):
         return {
-            '"rapidjson/document.h"',
+            '<boost/json.hpp>',
             "<exception>"
         }
 
@@ -171,7 +171,7 @@ class ObjectSchema(SchemaBase):
 
     def CppIncludes(self, resolver=None):
         incs = super().CppIncludes(resolver=resolver)
-        incs.update({"<boost/optional.hpp>"})
+        incs.update({"<optional>"})
         for _, ps in self.GetPropertySchemas().items():
             incs.update(ps.CppIncludes(resolver))
         return incs
@@ -225,7 +225,7 @@ class StringSchema(SchemaBase):
             if self.data['format'] == 'uuid':
                 incs.update({"<boost/uuid/uuid.hpp>", "<boost/uuid/random_generator.hpp>", "<boost/uuid/uuid_io.hpp>"})
             elif self.data['format'] == 'date-time':
-                incs.update({"<boost/optional.hpp>", "<boost/date_time/posix_time/posix_time.hpp>", "<boost/algorithm/string/replace.hpp>"})
+                incs.update({"<optional>", "<boost/date_time/posix_time/posix_time.hpp>", "<boost/algorithm/string/replace.hpp>"})
         return incs
 
     def AnExample(self, resolver, index: ExampleIndex):
